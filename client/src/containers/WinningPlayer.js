@@ -14,7 +14,11 @@ const checkWin = (board) => {
     [2, 4, 6]
   ];
 
-  let winningPlayer = null;
+  let winningPlayer = "Nobody"
+  board.forEach(tile => {
+    if(tile === null) winningPlayer = null
+  })
+
   winConditions.forEach((winCondition) => {
     if(
       board[winCondition[0]] === board[winCondition[1]] &&
