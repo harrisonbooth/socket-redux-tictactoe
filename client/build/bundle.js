@@ -28389,9 +28389,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     onTileClick: function onTileClick(tile, index, player, winner, playerType, socket) {
       if (tile || winner) return;
       if (playerType !== player) return;
-      // dispatch(changeTile(index, player))
       socket.emit("action", (0, _actions.changeTile)(index, player));
-      // dispatch(changeTurn(player))
       socket.emit("action", (0, _actions.changeTurn)(player));
     }
   };
@@ -28555,7 +28553,6 @@ var mapStateToProps = function mapStateToProps(_ref) {
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     onResetButtonPressed: function onResetButtonPressed(socket) {
-      // dispatch(resetGame())
       socket.emit("action", (0, _actions.resetGame)());
     }
   };

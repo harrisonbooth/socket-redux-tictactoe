@@ -17,9 +17,7 @@ const mapDispatchToProps = dispatch => {
     onTileClick: (tile, index, player, winner, playerType, socket) => {
       if(tile || winner) return
       if(playerType !== player) return
-      // dispatch(changeTile(index, player))
       socket.emit("action", changeTile(index, player))
-      // dispatch(changeTurn(player))
       socket.emit("action", changeTurn(player))
     }
   }

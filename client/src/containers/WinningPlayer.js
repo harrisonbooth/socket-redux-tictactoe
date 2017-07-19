@@ -40,7 +40,6 @@ const mapStateToProps = ({ board, socket }) => {
 const mapDispatchToProps = dispatch => {
   return {
     onResetButtonPressed: socket => {
-      // dispatch(resetGame())
       socket.emit("action", resetGame())
     }
   }
