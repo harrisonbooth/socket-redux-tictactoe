@@ -13,21 +13,23 @@ let roomCount = 1
 
 io.on('connection', socket => {
   const roomList = io.sockets.adapter.rooms
+  let currentRoom = "room"+roomCount
 
   let count
-  if(roomList["room"+roomCount] === undefined) {
+  if(roomList[currentRoom] === undefined) {
     count = 0
   } else {
-    count = roomList["room"+roomCount].length
+    count = roomList[currentRoom].length
   }
 
   if(count < 2) {
-    socket.join("room"+roomCount)
-    io.to("room"+roomCount).emit("roomNumber", "room"+roomCount)
+    socket.join(currentRoom)
+    io.to(currentRoom).emit("roomNumber", currentRoom)
   } else {
     roomCount++
-    socket.join("room"+roomCount)
-    io.to("room"+roomCount).emit("roomNumber", "room"+roomCount)
+    currentRoom = "room"+roomCount
+    socket.join(currentRoom)
+    io.to(currentRoom).emit("roomNumber", currentRoom)
   }
 
   socket.on('action', emitObject => {
