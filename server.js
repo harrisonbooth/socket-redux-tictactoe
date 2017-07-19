@@ -16,5 +16,5 @@ io.on('connection', socket => {
 })
 
 const server = http.listen(3000, function () {
-  console.log('TicTacToe listening on port', this.address().port)
+  console.log('TicTacToe listening on port', 3000)
 })
