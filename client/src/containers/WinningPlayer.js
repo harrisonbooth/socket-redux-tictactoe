@@ -36,10 +36,12 @@ const mapStateToProps = ({ board }) => {
 const mapDispatchToProps = dispatch => {
   return {
     onWinnerDeclared: winner => {
-      dispatch(setWinner(winner))
+      // dispatch(setWinner(winner))
+      socket.emit("action", setWinner(winner))
     },
     onResetButtonPressed: () => {
-      dispatch(resetGame())
+      // dispatch(resetGame())
+      socket.emit("action", resetGame())
     }
   }
 }

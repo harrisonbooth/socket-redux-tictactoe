@@ -38,3 +38,10 @@ export const addPlayer = () => {
     type: "ADD_PLAYER"
   }
 }
+
+export const setSocket = (socket) => {
+  return {
+    type: "SET_SOCKET",
+    socket
+  }
+}

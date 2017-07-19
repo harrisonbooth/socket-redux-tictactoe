@@ -2,7 +2,7 @@ import React from "react"
 import PropTypes from "prop-types"
 import Tile from "./Tile"
 
-const Board = ({ board, player, onTileClick, winner, playerType }) => {
+const Board = ({ board, player, onTileClick, winner, playerType, socket }) => {
   let tilesInRow = [];
   const rows = board.map((tile, index) => {
     tilesInRow.push(
@@ -10,7 +10,7 @@ const Board = ({ board, player, onTileClick, winner, playerType }) => {
         tile={tile} 
         key={index} 
         onClick={() => {
-          onTileClick(tile, index, player, winner, playerType)
+          onTileClick(tile, index, player, winner, playerType, socket)
         }} 
       />
     );

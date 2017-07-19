@@ -1,4 +1,5 @@
 import React from "react"
+import PropTypes from "prop-types"
 import GameBoard from "../containers/GameBoard"
 import WinningPlayer from "../containers/WinningPlayer"
 
@@ -8,8 +9,7 @@ class App extends React.Component {
   }
 
   componentDidMount () {
-    this.props.onLoadApp(this.props.currentPlayers)
-    console.log(this.props)
+    this.props.onLoadApp(this.props.currentPlayers, this.props.socket)
   }
   
   render () {
@@ -20,6 +20,11 @@ class App extends React.Component {
       </div>
     )
   }
+}
+
+App.propTypes = {
+  currentPlayers: PropTypes.array,
+  socket: PropTypes.object
 }
 
 export default App

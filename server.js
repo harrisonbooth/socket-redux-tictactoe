@@ -10,8 +10,8 @@ app.get('/', () => {
 })
 
 io.on('connection', socket => {
-  socket.on('event', object => {
-    io.emit('event', object)
+  socket.on('action', action => {
+    io.emit('action', action)
   })
 })
 

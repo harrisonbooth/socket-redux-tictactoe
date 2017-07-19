@@ -7,17 +7,20 @@ const mapStateToProps = state => {
     board: state.board,
     player: state.player,
     winner: state.winner,
-    playerType: state.playerType
+    playerType: state.playerType,
+    socket: state.socket
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    onTileClick: (tile, index, player, winner, playerType) => {
+    onTileClick: (tile, index, player, winner, playerType, socket) => {
       if(tile || winner) return
       if(playerType !== player) return
-      dispatch(changeTile(index, player))
-      dispatch(changeTurn(player))
+      // dispatch(changeTile(index, player))
+      socket.emit("action", changeTile(index, player))
+      // dispatch(changeTurn(player))
+      socket.emit("action", changeTurn(player))
     }
   }
 }

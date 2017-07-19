@@ -8,18 +8,21 @@ const decidePlayerType = (currentPlayers) => {
   return "X"
 }
 
-const mapStateToProps = ({ currentPlayers, playerType }) => {
+const mapStateToProps = ({ currentPlayers, playerType, socket }) => {
   return {
     currentPlayers,
-    playerType
+    playerType,
+    socket
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    onLoadApp: (currentPlayers) => {
-      dispatch(grantPlayerType(decidePlayerType(currentPlayers)))
-      dispatch(addPlayer())
+    onLoadApp: (currentPlayers, socket) => {
+      // dispatch(grantPlayerType(decidePlayerType(currentPlayers)))
+      socket.emit("action", grantPlayerType(decidePlayerType(currentPlayers)))
+      // dispatch(addPlayer())
+      socket.emit("action", addPlayer())
     }
   }
 }
