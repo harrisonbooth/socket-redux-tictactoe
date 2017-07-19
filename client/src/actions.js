@@ -45,3 +45,10 @@ export const setSocket = (socket) => {
     socket
   }
 }
+
+export const setPlayers = (currentPlayers) => {
+  return {
+    type: "SET_PLAYERS",
+    currentPlayers
+  }
+}

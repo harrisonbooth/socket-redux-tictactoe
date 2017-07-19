@@ -4628,6 +4628,13 @@ var setSocket = exports.setSocket = function setSocket(socket) {
   };
 };
 
+var setPlayers = exports.setPlayers = function setPlayers(currentPlayers) {
+  return {
+    type: "SET_PLAYERS",
+    currentPlayers: currentPlayers
+  };
+};
+
 /***/ }),
 /* 32 */
 /***/ (function(module, exports, __webpack_require__) {
@@ -28177,8 +28184,10 @@ var currentPlayers = function currentPlayers() {
     case "ADD_PLAYER":
       if (state.length > 2) return state;
       var newPlayer = "X";
-      if (!state.length > 0) newPlayer = "O";
+      if (state.length > 0) newPlayer = "O";
       return [].concat(_toConsumableArray(state), [newPlayer]);
+    case "SET_PLAYERS":
+      return action.currentPlayers;
     default:
       return state;
   }
@@ -28275,11 +28284,8 @@ var mapStateToProps = function mapStateToProps(_ref) {
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
-    onLoadApp: function onLoadApp(currentPlayers, socket) {
-      // dispatch(grantPlayerType(decidePlayerType(currentPlayers)))
-      socket.emit("action", (0, _actions.grantPlayerType)(decidePlayerType(currentPlayers)));
-      // dispatch(addPlayer())
-      socket.emit("action", (0, _actions.addPlayer)());
+    onPlayerTypeButtonClick: function onPlayerTypeButtonClick(playerType) {
+      dispatch((0, _actions.grantPlayerType)(playerType));
     }
   };
 };
@@ -28299,8 +28305,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
 var _react = __webpack_require__(16);
 
 var _react2 = _interopRequireDefault(_react);
@@ -28319,44 +28323,30 @@ var _WinningPlayer2 = _interopRequireDefault(_WinningPlayer);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+var App = function App(_ref) {
+  var onPlayerTypeButtonClick = _ref.onPlayerTypeButtonClick,
+      playerType = _ref.playerType;
 
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var App = function (_React$Component) {
-  _inherits(App, _React$Component);
-
-  function App(props) {
-    _classCallCheck(this, App);
-
-    return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
-  }
-
-  _createClass(App, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      this.props.onLoadApp(this.props.currentPlayers, this.props.socket);
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      return _react2.default.createElement(
-        "div",
-        null,
-        _react2.default.createElement(_GameBoard2.default, null),
-        _react2.default.createElement(_WinningPlayer2.default, null)
-      );
-    }
-  }]);
-
-  return App;
-}(_react2.default.Component);
-
-App.propTypes = {
-  currentPlayers: _propTypes2.default.array,
-  socket: _propTypes2.default.object
+  return _react2.default.createElement(
+    "div",
+    null,
+    _react2.default.createElement(_GameBoard2.default, null),
+    _react2.default.createElement(_WinningPlayer2.default, null),
+    _react2.default.createElement(
+      "button",
+      { onClick: function onClick() {
+          onPlayerTypeButtonClick("X");
+        } },
+      "X"
+    ),
+    _react2.default.createElement(
+      "button",
+      { onClick: function onClick() {
+          onPlayerTypeButtonClick("O");
+        } },
+      "O"
+    )
+  );
 };
 
 exports.default = App;
@@ -31802,6 +31792,10 @@ var _actions = __webpack_require__(31);
 
 var SocketAdapter = function SocketAdapter(socket, store) {
   store.dispatch((0, _actions.setSocket)(socket));
+  // socket.on("setPlayerType", (playerType) => {
+  //   store.dispatch(grantPlayerType(playerType))
+  // })
+
   socket.on("action", function (action) {
     store.dispatch(action);
   });

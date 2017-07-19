@@ -3,28 +3,15 @@ import PropTypes from "prop-types"
 import GameBoard from "../containers/GameBoard"
 import WinningPlayer from "../containers/WinningPlayer"
 
-class App extends React.Component {
-  constructor (props) {
-    super(props)
-  }
-
-  componentDidMount () {
-    this.props.onLoadApp(this.props.currentPlayers, this.props.socket)
-  }
-  
-  render () {
-    return (
-      <div>
-        <GameBoard />
-        <WinningPlayer />
-      </div>
-    )
-  }
-}
-
-App.propTypes = {
-  currentPlayers: PropTypes.array,
-  socket: PropTypes.object
+const App = ({ onPlayerTypeButtonClick, playerType }) => {
+  return (
+    <div>
+      <GameBoard />
+      <WinningPlayer />
+      <button onClick={() => {onPlayerTypeButtonClick("X")}}>X</button>
+      <button onClick={() => {onPlayerTypeButtonClick("O")}}>O</button>
+    </div>
+  )
 }
 
 export default App
