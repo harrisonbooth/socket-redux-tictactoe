@@ -4,6 +4,7 @@ import winner from "./winner"
 import currentPlayers from "./currentPlayers"
 import playerType from "./playerType"
 import socket from "./socket"
+import room from "./room"
 import { combineReducers } from "redux"
 
 const ticTacToeApp = combineReducers({
@@ -12,7 +13,8 @@ const ticTacToeApp = combineReducers({
   winner,
   currentPlayers,
   playerType,
-  socket
+  socket,
+  room
 })
 
 export default ticTacToeApp

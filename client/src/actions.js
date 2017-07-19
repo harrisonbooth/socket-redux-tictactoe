@@ -52,3 +52,10 @@ export const setPlayers = (currentPlayers) => {
     currentPlayers
   }
 }
+
+export const setRoom = (roomNumber) => {
+  return {
+    type: "SET_ROOM",
+    roomNumber
+  }
+}

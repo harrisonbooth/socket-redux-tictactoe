@@ -2,7 +2,7 @@ import React from "react"
 import PropTypes from "prop-types"
 import Tile from "./Tile"
 
-const Board = ({ board, player, onTileClick, winner, playerType, socket }) => {
+const Board = ({ board, player, onTileClick, winner, playerType, socket, room }) => {
   let tilesInRow = [];
   const rows = board.map((tile, index) => {
     tilesInRow.push(
@@ -10,7 +10,7 @@ const Board = ({ board, player, onTileClick, winner, playerType, socket }) => {
         tile={tile} 
         key={index} 
         onClick={() => {
-          onTileClick(tile, index, player, winner, playerType, socket)
+          onTileClick(tile, index, player, winner, playerType, socket, room)
         }} 
       />
     );
@@ -40,7 +40,8 @@ Board.PropTypes = {
   ).isRequired,
   onTileClick: PropTypes.func.isRequired,
   player: PropTypes.string.isRequired,
-  winner: PropTypes.string
+  winner: PropTypes.string,
+  room: PropTypes.string
 }
 
 export default Board

@@ -1830,7 +1830,7 @@ function getPooledWarningPropertyDefinition(propName, getVal) {
  * Expose `debug()` as the module.
  */
 
-exports = module.exports = __webpack_require__(261);
+exports = module.exports = __webpack_require__(262);
 exports.log = log;
 exports.formatArgs = formatArgs;
 exports.save = save;
@@ -3393,15 +3393,15 @@ Emitter.prototype.hasListeners = function(event){
  * Module dependencies.
  */
 
-var keys = __webpack_require__(271);
+var keys = __webpack_require__(272);
 var hasBinary = __webpack_require__(108);
-var sliceBuffer = __webpack_require__(272);
-var after = __webpack_require__(273);
-var utf8 = __webpack_require__(274);
+var sliceBuffer = __webpack_require__(273);
+var after = __webpack_require__(274);
+var utf8 = __webpack_require__(275);
 
 var base64encoder;
 if (global && global.ArrayBuffer) {
-  base64encoder = __webpack_require__(275);
+  base64encoder = __webpack_require__(276);
 }
 
 /**
@@ -3459,7 +3459,7 @@ var err = { type: 'error', data: 'parser error' };
  * Create a blob api even for blob builder when vendor prefixes exist
  */
 
-var Blob = __webpack_require__(276);
+var Blob = __webpack_require__(277);
 
 /**
  * Encodes a packet.
@@ -4632,6 +4632,13 @@ var setPlayers = exports.setPlayers = function setPlayers(currentPlayers) {
   return {
     type: "SET_PLAYERS",
     currentPlayers: currentPlayers
+  };
+};
+
+var setRoom = exports.setRoom = function setRoom(roomNumber) {
+  return {
+    type: "SET_ROOM",
+    roomNumber: roomNumber
   };
 };
 
@@ -7911,7 +7918,7 @@ function isPlainObject(value) {
 var debug = __webpack_require__(14)('socket.io-parser');
 var Emitter = __webpack_require__(24);
 var hasBin = __webpack_require__(108);
-var binary = __webpack_require__(264);
+var binary = __webpack_require__(265);
 var isBuf = __webpack_require__(109);
 
 /**
@@ -8311,7 +8318,7 @@ function error() {
 
 /* WEBPACK VAR INJECTION */(function(global) {// browser shim for xmlhttprequest module
 
-var hasCORS = __webpack_require__(269);
+var hasCORS = __webpack_require__(270);
 
 module.exports = function (opts) {
   var xdomain = opts.xdomain;
@@ -13029,7 +13036,7 @@ module.exports = function parseuri(str) {
  * Module requirements.
  */
 
-var isArray = __webpack_require__(263);
+var isArray = __webpack_require__(264);
 
 var toString = Object.prototype.toString;
 var withNativeBlob = typeof global.Blob === 'function' || toString.call(global.Blob) === '[object BlobConstructor]';
@@ -13117,7 +13124,7 @@ function isBuf(obj) {
  * Module dependencies.
  */
 
-var eio = __webpack_require__(266);
+var eio = __webpack_require__(267);
 var Socket = __webpack_require__(115);
 var Emitter = __webpack_require__(24);
 var parser = __webpack_require__(63);
@@ -13125,7 +13132,7 @@ var on = __webpack_require__(116);
 var bind = __webpack_require__(117);
 var debug = __webpack_require__(14)('socket.io-client:manager');
 var indexOf = __webpack_require__(114);
-var Backoff = __webpack_require__(282);
+var Backoff = __webpack_require__(283);
 
 /**
  * IE6+ hasOwnProperty
@@ -13696,9 +13703,9 @@ Manager.prototype.onreconnect = function () {
  */
 
 var XMLHttpRequest = __webpack_require__(64);
-var XHR = __webpack_require__(270);
-var JSONP = __webpack_require__(277);
-var websocket = __webpack_require__(278);
+var XHR = __webpack_require__(271);
+var JSONP = __webpack_require__(278);
+var websocket = __webpack_require__(279);
 
 /**
  * Export transports.
@@ -14099,7 +14106,7 @@ module.exports = function(arr, obj){
 
 var parser = __webpack_require__(63);
 var Emitter = __webpack_require__(24);
-var toArray = __webpack_require__(281);
+var toArray = __webpack_require__(282);
 var on = __webpack_require__(116);
 var bind = __webpack_require__(117);
 var debug = __webpack_require__(14)('socket.io-client:socket');
@@ -14594,15 +14601,15 @@ var _index = __webpack_require__(245);
 
 var _index2 = _interopRequireDefault(_index);
 
-var _GameClient = __webpack_require__(252);
+var _GameClient = __webpack_require__(253);
 
 var _GameClient2 = _interopRequireDefault(_GameClient);
 
-var _socket = __webpack_require__(259);
+var _socket = __webpack_require__(260);
 
 var _socket2 = _interopRequireDefault(_socket);
 
-var _SocketAdapter = __webpack_require__(283);
+var _SocketAdapter = __webpack_require__(284);
 
 var _SocketAdapter2 = _interopRequireDefault(_SocketAdapter);
 
@@ -28073,6 +28080,10 @@ var _socket = __webpack_require__(251);
 
 var _socket2 = _interopRequireDefault(_socket);
 
+var _room = __webpack_require__(252);
+
+var _room2 = _interopRequireDefault(_room);
+
 var _redux = __webpack_require__(30);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -28083,7 +28094,8 @@ var ticTacToeApp = (0, _redux.combineReducers)({
   winner: _winner2.default,
   currentPlayers: _currentPlayers2.default,
   playerType: _playerType2.default,
-  socket: _socket2.default
+  socket: _socket2.default,
+  room: _room2.default
 });
 
 exports.default = ticTacToeApp;
@@ -28253,12 +28265,36 @@ exports.default = socket;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+var room = function room() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "";
+  var action = arguments[1];
+
+  switch (action.type) {
+    case "SET_ROOM":
+      return action.roomNumber;
+    default:
+      return state;
+  }
+};
+
+exports.default = room;
+
+/***/ }),
+/* 253 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 
 var _reactRedux = __webpack_require__(40);
 
 var _actions = __webpack_require__(31);
 
-var _App = __webpack_require__(253);
+var _App = __webpack_require__(254);
 
 var _App2 = _interopRequireDefault(_App);
 
@@ -28272,17 +28308,19 @@ var decidePlayerType = function decidePlayerType(currentPlayers) {
 
 var mapStateToProps = function mapStateToProps(_ref) {
   var currentPlayers = _ref.currentPlayers,
-      playerType = _ref.playerType;
+      playerType = _ref.playerType,
+      room = _ref.room;
 
   return {
     currentPlayers: currentPlayers,
-    playerType: playerType
+    playerType: playerType,
+    room: room
   };
 };
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
-    onPlayerTypeButtonClick: function onPlayerTypeButtonClick(playerType) {
+    onPlayerTypeButtonClick: function onPlayerTypeButtonClick(playerType, room) {
       dispatch((0, _actions.grantPlayerType)(playerType));
     }
   };
@@ -28293,7 +28331,7 @@ var GameClient = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_
 exports.default = GameClient;
 
 /***/ }),
-/* 253 */
+/* 254 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28311,11 +28349,11 @@ var _propTypes = __webpack_require__(23);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _GameBoard = __webpack_require__(254);
+var _GameBoard = __webpack_require__(255);
 
 var _GameBoard2 = _interopRequireDefault(_GameBoard);
 
-var _WinningPlayer = __webpack_require__(257);
+var _WinningPlayer = __webpack_require__(258);
 
 var _WinningPlayer2 = _interopRequireDefault(_WinningPlayer);
 
@@ -28354,7 +28392,7 @@ App.propTypes = {
 exports.default = App;
 
 /***/ }),
-/* 254 */
+/* 255 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28368,7 +28406,7 @@ var _reactRedux = __webpack_require__(40);
 
 var _actions = __webpack_require__(31);
 
-var _Board = __webpack_require__(255);
+var _Board = __webpack_require__(256);
 
 var _Board2 = _interopRequireDefault(_Board);
 
@@ -28380,17 +28418,24 @@ var mapStateToProps = function mapStateToProps(state) {
     player: state.player,
     winner: state.winner,
     playerType: state.playerType,
-    socket: state.socket
+    socket: state.socket,
+    room: state.room
   };
 };
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
-    onTileClick: function onTileClick(tile, index, player, winner, playerType, socket) {
+    onTileClick: function onTileClick(tile, index, player, winner, playerType, socket, room) {
       if (tile || winner) return;
       if (playerType !== player) return;
-      socket.emit("action", (0, _actions.changeTile)(index, player));
-      socket.emit("action", (0, _actions.changeTurn)(player));
+      socket.emit("action", {
+        action: (0, _actions.changeTile)(index, player),
+        room: room
+      });
+      socket.emit("action", {
+        action: (0, _actions.changeTurn)(player),
+        room: room
+      });
     }
   };
 };
@@ -28400,7 +28445,7 @@ var GameBoard = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_B
 exports.default = GameBoard;
 
 /***/ }),
-/* 255 */
+/* 256 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28418,7 +28463,7 @@ var _propTypes = __webpack_require__(23);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _Tile = __webpack_require__(256);
+var _Tile = __webpack_require__(257);
 
 var _Tile2 = _interopRequireDefault(_Tile);
 
@@ -28430,7 +28475,8 @@ var Board = function Board(_ref) {
       onTileClick = _ref.onTileClick,
       winner = _ref.winner,
       playerType = _ref.playerType,
-      socket = _ref.socket;
+      socket = _ref.socket,
+      room = _ref.room;
 
   var tilesInRow = [];
   var rows = board.map(function (tile, index) {
@@ -28438,7 +28484,7 @@ var Board = function Board(_ref) {
       tile: tile,
       key: index,
       onClick: function onClick() {
-        onTileClick(tile, index, player, winner, playerType, socket);
+        onTileClick(tile, index, player, winner, playerType, socket, room);
       }
     }));
 
@@ -28465,13 +28511,14 @@ Board.PropTypes = {
   board: _propTypes2.default.arrayOf(_propTypes2.default.string.isRequired).isRequired,
   onTileClick: _propTypes2.default.func.isRequired,
   player: _propTypes2.default.string.isRequired,
-  winner: _propTypes2.default.string
+  winner: _propTypes2.default.string,
+  room: _propTypes2.default.string
 };
 
 exports.default = Board;
 
 /***/ }),
-/* 256 */
+/* 257 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28505,7 +28552,7 @@ Tile.propTypes = {
 exports.default = Tile;
 
 /***/ }),
-/* 257 */
+/* 258 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28519,7 +28566,7 @@ var _reactRedux = __webpack_require__(40);
 
 var _actions = __webpack_require__(31);
 
-var _Winner = __webpack_require__(258);
+var _Winner = __webpack_require__(259);
 
 var _Winner2 = _interopRequireDefault(_Winner);
 
@@ -28542,18 +28589,23 @@ var checkWin = function checkWin(board) {
 
 var mapStateToProps = function mapStateToProps(_ref) {
   var board = _ref.board,
-      socket = _ref.socket;
+      socket = _ref.socket,
+      room = _ref.room;
 
   return {
     winner: checkWin(board),
-    socket: socket
+    socket: socket,
+    room: room
   };
 };
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
-    onResetButtonPressed: function onResetButtonPressed(socket) {
-      socket.emit("action", (0, _actions.resetGame)());
+    onResetButtonPressed: function onResetButtonPressed(socket, room) {
+      socket.emit("action", {
+        action: (0, _actions.resetGame)(),
+        room: room
+      });
     }
   };
 };
@@ -28563,7 +28615,7 @@ var WinningPlayer = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps
 exports.default = WinningPlayer;
 
 /***/ }),
-/* 258 */
+/* 259 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28590,7 +28642,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var Winner = function Winner(_ref) {
   var winner = _ref.winner,
       onResetButtonPressed = _ref.onResetButtonPressed,
-      socket = _ref.socket;
+      socket = _ref.socket,
+      room = _ref.room;
 
   if (!winner) return null;
 
@@ -28607,7 +28660,7 @@ var Winner = function Winner(_ref) {
       "button",
       {
         onClick: function onClick() {
-          onResetButtonPressed(socket);
+          onResetButtonPressed(socket, room);
         }
       },
       "Play again!"
@@ -28618,13 +28671,14 @@ var Winner = function Winner(_ref) {
 Winner.propTypes = {
   winner: _propTypes2.default.string,
   onResetButtonPressed: _propTypes2.default.func,
-  socket: _propTypes2.default.object
+  socket: _propTypes2.default.object,
+  room: _propTypes2.default.string
 };
 
 exports.default = Winner;
 
 /***/ }),
-/* 259 */
+/* 260 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
@@ -28632,7 +28686,7 @@ exports.default = Winner;
  * Module dependencies.
  */
 
-var url = __webpack_require__(260);
+var url = __webpack_require__(261);
 var parser = __webpack_require__(63);
 var Manager = __webpack_require__(110);
 var debug = __webpack_require__(14)('socket.io-client');
@@ -28724,7 +28778,7 @@ exports.Socket = __webpack_require__(115);
 
 
 /***/ }),
-/* 260 */
+/* 261 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global) {
@@ -28806,7 +28860,7 @@ function url (uri, loc) {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7)))
 
 /***/ }),
-/* 261 */
+/* 262 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
@@ -28822,7 +28876,7 @@ exports.coerce = coerce;
 exports.disable = disable;
 exports.enable = enable;
 exports.enabled = enabled;
-exports.humanize = __webpack_require__(262);
+exports.humanize = __webpack_require__(263);
 
 /**
  * The currently active debug mode names, and names to skip.
@@ -29014,7 +29068,7 @@ function coerce(val) {
 
 
 /***/ }),
-/* 262 */
+/* 263 */
 /***/ (function(module, exports) {
 
 /**
@@ -29172,7 +29226,7 @@ function plural(ms, n, name) {
 
 
 /***/ }),
-/* 263 */
+/* 264 */
 /***/ (function(module, exports) {
 
 var toString = {}.toString;
@@ -29183,7 +29237,7 @@ module.exports = Array.isArray || function (arr) {
 
 
 /***/ }),
-/* 264 */
+/* 265 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global) {/*global Blob,File*/
@@ -29192,7 +29246,7 @@ module.exports = Array.isArray || function (arr) {
  * Module requirements
  */
 
-var isArray = __webpack_require__(265);
+var isArray = __webpack_require__(266);
 var isBuf = __webpack_require__(109);
 var toString = Object.prototype.toString;
 var withNativeBlob = typeof global.Blob === 'function' || toString.call(global.Blob) === '[object BlobConstructor]';
@@ -29331,7 +29385,7 @@ exports.removeBlobs = function(data, callback) {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7)))
 
 /***/ }),
-/* 265 */
+/* 266 */
 /***/ (function(module, exports) {
 
 var toString = {}.toString;
@@ -29342,19 +29396,19 @@ module.exports = Array.isArray || function (arr) {
 
 
 /***/ }),
-/* 266 */
-/***/ (function(module, exports, __webpack_require__) {
-
-
-module.exports = __webpack_require__(267);
-
-
-/***/ }),
 /* 267 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
 module.exports = __webpack_require__(268);
+
+
+/***/ }),
+/* 268 */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+module.exports = __webpack_require__(269);
 
 /**
  * Exports parser
@@ -29366,7 +29420,7 @@ module.exports.parser = __webpack_require__(25);
 
 
 /***/ }),
-/* 268 */
+/* 269 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global) {/**
@@ -29379,7 +29433,7 @@ var debug = __webpack_require__(14)('engine.io-client:socket');
 var index = __webpack_require__(114);
 var parser = __webpack_require__(25);
 var parseuri = __webpack_require__(107);
-var parsejson = __webpack_require__(280);
+var parsejson = __webpack_require__(281);
 var parseqs = __webpack_require__(41);
 
 /**
@@ -30117,7 +30171,7 @@ Socket.prototype.filterUpgrades = function (upgrades) {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7)))
 
 /***/ }),
-/* 269 */
+/* 270 */
 /***/ (function(module, exports) {
 
 
@@ -30140,7 +30194,7 @@ try {
 
 
 /***/ }),
-/* 270 */
+/* 271 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global) {/**
@@ -30560,7 +30614,7 @@ function unloadHandler () {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7)))
 
 /***/ }),
-/* 271 */
+/* 272 */
 /***/ (function(module, exports) {
 
 
@@ -30585,7 +30639,7 @@ module.exports = Object.keys || function keys (obj){
 
 
 /***/ }),
-/* 272 */
+/* 273 */
 /***/ (function(module, exports) {
 
 /**
@@ -30620,7 +30674,7 @@ module.exports = function(arraybuffer, start, end) {
 
 
 /***/ }),
-/* 273 */
+/* 274 */
 /***/ (function(module, exports) {
 
 module.exports = after
@@ -30654,7 +30708,7 @@ function noop() {}
 
 
 /***/ }),
-/* 274 */
+/* 275 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(module, global) {var __WEBPACK_AMD_DEFINE_RESULT__;/*! https://mths.be/utf8js v2.1.2 by @mathias */
@@ -30915,7 +30969,7 @@ function noop() {}
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(102)(module), __webpack_require__(7)))
 
 /***/ }),
-/* 275 */
+/* 276 */
 /***/ (function(module, exports) {
 
 /*
@@ -30988,7 +31042,7 @@ function noop() {}
 
 
 /***/ }),
-/* 276 */
+/* 277 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global) {/**
@@ -31091,7 +31145,7 @@ module.exports = (function() {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7)))
 
 /***/ }),
-/* 277 */
+/* 278 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global) {
@@ -31329,7 +31383,7 @@ JSONPPolling.prototype.doWrite = function (data, fn) {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7)))
 
 /***/ }),
-/* 278 */
+/* 279 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global) {/**
@@ -31346,7 +31400,7 @@ var BrowserWebSocket = global.WebSocket || global.MozWebSocket;
 var NodeWebSocket;
 if (typeof window === 'undefined') {
   try {
-    NodeWebSocket = __webpack_require__(279);
+    NodeWebSocket = __webpack_require__(280);
   } catch (e) { }
 }
 
@@ -31622,13 +31676,13 @@ WS.prototype.check = function () {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7)))
 
 /***/ }),
-/* 279 */
+/* 280 */
 /***/ (function(module, exports) {
 
 /* (ignored) */
 
 /***/ }),
-/* 280 */
+/* 281 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global) {/**
@@ -31666,7 +31720,7 @@ module.exports = function parsejson(data) {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7)))
 
 /***/ }),
-/* 281 */
+/* 282 */
 /***/ (function(module, exports) {
 
 module.exports = toArray
@@ -31685,7 +31739,7 @@ function toArray(list, index) {
 
 
 /***/ }),
-/* 282 */
+/* 283 */
 /***/ (function(module, exports) {
 
 
@@ -31776,7 +31830,7 @@ Backoff.prototype.setJitter = function(jitter){
 
 
 /***/ }),
-/* 283 */
+/* 284 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -31791,7 +31845,11 @@ var _redux = __webpack_require__(30);
 var _actions = __webpack_require__(31);
 
 var SocketAdapter = function SocketAdapter(socket, store) {
-  store.dispatch((0, _actions.setSocket)(socket));
+  socket.on("roomNumber", function (roomNumber) {
+    console.log(roomNumber);
+    store.dispatch((0, _actions.setRoom)(roomNumber));
+    store.dispatch((0, _actions.setSocket)(socket));
+  });
 
   socket.on("action", function (action) {
     store.dispatch(action);

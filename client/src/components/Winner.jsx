@@ -3,7 +3,7 @@ import PropTypes from "prop-types"
 import { dispatch } from "redux"
 import { setWinner } from "../actions"
 
-const Winner = ({ winner, onResetButtonPressed, socket }) => {
+const Winner = ({ winner, onResetButtonPressed, socket, room }) => {
   if(!winner) return null
 
   return(
@@ -12,7 +12,7 @@ const Winner = ({ winner, onResetButtonPressed, socket }) => {
       <button 
         onClick={
           () => {
-            onResetButtonPressed(socket)
+            onResetButtonPressed(socket, room)
           }
         }
       >
@@ -25,7 +25,8 @@ const Winner = ({ winner, onResetButtonPressed, socket }) => {
 Winner.propTypes = {
   winner: PropTypes.string,
   onResetButtonPressed: PropTypes.func,
-  socket: PropTypes.object
+  socket: PropTypes.object,
+  room: PropTypes.string
 }
 
 export default Winner

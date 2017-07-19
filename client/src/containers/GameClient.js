@@ -8,16 +8,17 @@ const decidePlayerType = (currentPlayers) => {
   return "X"
 }
 
-const mapStateToProps = ({ currentPlayers, playerType }) => {
+const mapStateToProps = ({ currentPlayers, playerType, room }) => {
   return {
     currentPlayers,
-    playerType
+    playerType,
+    room
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    onPlayerTypeButtonClick: (playerType) => {
+    onPlayerTypeButtonClick: (playerType, room) => {
       dispatch(grantPlayerType(playerType))
     }
   }
