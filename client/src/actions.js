@@ -1,0 +1,40 @@
+export const changeTile = (index, player) => {
+  return {
+    type: "CHANGE_TILE",
+    index,
+    player
+  }
+}
+
+export const changeTurn = player => {
+  return {
+    type: "CHANGE_TURN",
+    player
+  }
+}
+
+export const setWinner = player => {
+  return {
+    type: "SET_WINNER",
+    player
+  }
+}
+
+export const resetGame = () => {
+  return {
+    type: "RESET_GAME"
+  }
+}
+
+export const grantPlayerType = playerType => {
+  return {
+    type: "GRANT_PLAYER_TYPE",
+    playerType
+  }
+}
+
+export const addPlayer = () => {
+  return {
+    type: "ADD_PLAYER"
+  }
+}
