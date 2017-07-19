@@ -2,6 +2,23 @@ body {
   text-align: center;
 }
 
+#player-type-button-wrapper {
+  height: 100vh;
+  width: 100vw;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.player-type-button {
+  height: 100%;
+  width: 50%;
+  background-size: contain;
+  border: none;
+  background-color: wheat;
+  transition-duration: 0.3s;
+}
+
 #game-board {
   width: 600px;
   margin: 0 auto;

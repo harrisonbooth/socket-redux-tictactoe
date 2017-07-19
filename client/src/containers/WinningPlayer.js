@@ -26,10 +26,11 @@ const checkWin = (board) => {
   return winningPlayer
 };
 
-const mapStateToProps = ({ board }) => {
+const mapStateToProps = ({ board, socket }) => {
   return {
     board,
-    winner: checkWin(board)
+    winner: checkWin(board),
+    socket
   }
 }
 
@@ -39,7 +40,7 @@ const mapDispatchToProps = dispatch => {
       // dispatch(setWinner(winner))
       socket.emit("action", setWinner(winner))
     },
-    onResetButtonPressed: () => {
+    onResetButtonPressed: socket => {
       // dispatch(resetGame())
       socket.emit("action", resetGame())
     }

@@ -28271,10 +28271,12 @@ var decidePlayerType = function decidePlayerType(currentPlayers) {
 };
 
 var mapStateToProps = function mapStateToProps(_ref) {
-  var currentPlayers = _ref.currentPlayers;
+  var currentPlayers = _ref.currentPlayers,
+      playerType = _ref.playerType;
 
   return {
-    currentPlayers: currentPlayers
+    currentPlayers: currentPlayers,
+    playerType: playerType
   };
 };
 
@@ -28323,25 +28325,24 @@ var App = function App(_ref) {
   var onPlayerTypeButtonClick = _ref.onPlayerTypeButtonClick,
       playerType = _ref.playerType;
 
+  var playerButtons = null;
+  if (!playerType) playerButtons = _react2.default.createElement(
+    "div",
+    { id: "player-type-button-wrapper" },
+    _react2.default.createElement("button", { className: "player-type-button X", onClick: function onClick() {
+        onPlayerTypeButtonClick("X");
+      } }),
+    _react2.default.createElement("button", { className: "player-type-button O", onClick: function onClick() {
+        onPlayerTypeButtonClick("O");
+      } })
+  );
+
   return _react2.default.createElement(
     "div",
     null,
     _react2.default.createElement(_GameBoard2.default, null),
     _react2.default.createElement(_WinningPlayer2.default, null),
-    _react2.default.createElement(
-      "button",
-      { onClick: function onClick() {
-          onPlayerTypeButtonClick("X");
-        } },
-      "X"
-    ),
-    _react2.default.createElement(
-      "button",
-      { onClick: function onClick() {
-          onPlayerTypeButtonClick("O");
-        } },
-      "O"
-    )
+    playerButtons
   );
 };
 
@@ -28533,11 +28534,13 @@ var checkWin = function checkWin(board) {
 };
 
 var mapStateToProps = function mapStateToProps(_ref) {
-  var board = _ref.board;
+  var board = _ref.board,
+      socket = _ref.socket;
 
   return {
     board: board,
-    winner: checkWin(board)
+    winner: checkWin(board),
+    socket: socket
   };
 };
 
@@ -28547,7 +28550,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
       // dispatch(setWinner(winner))
       socket.emit("action", (0, _actions.setWinner)(winner));
     },
-    onResetButtonPressed: function onResetButtonPressed() {
+    onResetButtonPressed: function onResetButtonPressed(socket) {
       // dispatch(resetGame())
       socket.emit("action", (0, _actions.resetGame)());
     }
@@ -28587,7 +28590,8 @@ var Winner = function Winner(_ref) {
   var board = _ref.board,
       winner = _ref.winner,
       onWinnerDeclared = _ref.onWinnerDeclared,
-      onResetButtonPressed = _ref.onResetButtonPressed;
+      onResetButtonPressed = _ref.onResetButtonPressed,
+      socket = _ref.socket;
 
   if (!winner) return null;
 
@@ -28604,7 +28608,7 @@ var Winner = function Winner(_ref) {
       "button",
       {
         onClick: function onClick() {
-          onResetButtonPressed();
+          onResetButtonPressed(socket);
         }
       },
       "Play again!"

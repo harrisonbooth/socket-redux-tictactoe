@@ -3,7 +3,7 @@ import PropTypes from "prop-types"
 import { dispatch } from "redux"
 import { setWinner } from "../actions"
 
-const Winner = ({ board, winner, onWinnerDeclared, onResetButtonPressed }) => {
+const Winner = ({ board, winner, onWinnerDeclared, onResetButtonPressed, socket }) => {
   if(!winner) return null
 
   return(
@@ -12,7 +12,7 @@ const Winner = ({ board, winner, onWinnerDeclared, onResetButtonPressed }) => {
       <button 
         onClick={
           () => {
-            onResetButtonPressed()
+            onResetButtonPressed(socket)
           }
         }
       >
