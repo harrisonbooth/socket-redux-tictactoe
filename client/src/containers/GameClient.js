@@ -8,11 +8,9 @@ const decidePlayerType = (currentPlayers) => {
   return "X"
 }
 
-const mapStateToProps = ({ currentPlayers, playerType, socket }) => {
+const mapStateToProps = ({ currentPlayers }) => {
   return {
-    currentPlayers,
-    playerType,
-    socket
+    currentPlayers
   }
 }
 

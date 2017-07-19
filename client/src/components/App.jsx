@@ -3,7 +3,7 @@ import PropTypes from "prop-types"
 import GameBoard from "../containers/GameBoard"
 import WinningPlayer from "../containers/WinningPlayer"
 
-const App = ({ onPlayerTypeButtonClick, playerType }) => {
+const App = ({ onPlayerTypeButtonClick }) => {
   return (
     <div>
       <GameBoard />

@@ -10,12 +10,6 @@ app.get('/', () => {
 })
 
 io.on('connection', socket => {
-  // if(io.engine.clientsCount > 1) {
-  //   socket.emit('setPlayerType', "O")
-  // } else {
-  //   socket.emit('setPlayerType', "X")
-  // }
-
   socket.on('action', action => {
     io.emit('action', action)
   })

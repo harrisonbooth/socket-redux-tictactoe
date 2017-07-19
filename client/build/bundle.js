@@ -28271,14 +28271,10 @@ var decidePlayerType = function decidePlayerType(currentPlayers) {
 };
 
 var mapStateToProps = function mapStateToProps(_ref) {
-  var currentPlayers = _ref.currentPlayers,
-      playerType = _ref.playerType,
-      socket = _ref.socket;
+  var currentPlayers = _ref.currentPlayers;
 
   return {
-    currentPlayers: currentPlayers,
-    playerType: playerType,
-    socket: socket
+    currentPlayers: currentPlayers
   };
 };
 
@@ -31792,9 +31788,6 @@ var _actions = __webpack_require__(31);
 
 var SocketAdapter = function SocketAdapter(socket, store) {
   store.dispatch((0, _actions.setSocket)(socket));
-  // socket.on("setPlayerType", (playerType) => {
-  //   store.dispatch(grantPlayerType(playerType))
-  // })
 
   socket.on("action", function (action) {
     store.dispatch(action);
