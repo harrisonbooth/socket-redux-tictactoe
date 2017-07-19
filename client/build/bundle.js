@@ -28346,6 +28346,11 @@ var App = function App(_ref) {
   );
 };
 
+App.propTypes = {
+  onPlayerTypeButtonClick: _propTypes2.default.func,
+  playerType: _propTypes2.default.string
+};
+
 exports.default = App;
 
 /***/ }),
@@ -28538,7 +28543,6 @@ var mapStateToProps = function mapStateToProps(_ref) {
       socket = _ref.socket;
 
   return {
-    board: board,
     winner: checkWin(board),
     socket: socket
   };
@@ -28546,10 +28550,6 @@ var mapStateToProps = function mapStateToProps(_ref) {
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
-    onWinnerDeclared: function onWinnerDeclared(winner) {
-      // dispatch(setWinner(winner))
-      socket.emit("action", (0, _actions.setWinner)(winner));
-    },
     onResetButtonPressed: function onResetButtonPressed(socket) {
       // dispatch(resetGame())
       socket.emit("action", (0, _actions.resetGame)());
@@ -28587,9 +28587,7 @@ var _actions = __webpack_require__(31);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var Winner = function Winner(_ref) {
-  var board = _ref.board,
-      winner = _ref.winner,
-      onWinnerDeclared = _ref.onWinnerDeclared,
+  var winner = _ref.winner,
       onResetButtonPressed = _ref.onResetButtonPressed,
       socket = _ref.socket;
 
@@ -28617,8 +28615,9 @@ var Winner = function Winner(_ref) {
 };
 
 Winner.propTypes = {
-  board: _propTypes2.default.arrayOf(_propTypes2.default.string).isRequired,
-  winner: _propTypes2.default.string
+  winner: _propTypes2.default.string,
+  onResetButtonPressed: _propTypes2.default.func,
+  socket: _propTypes2.default.object
 };
 
 exports.default = Winner;

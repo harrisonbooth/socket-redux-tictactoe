@@ -17,6 +17,8 @@ body {
   border: none;
   background-color: wheat;
   transition-duration: 0.3s;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 #game-board {

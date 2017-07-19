@@ -21,4 +21,9 @@ const App = ({ onPlayerTypeButtonClick, playerType }) => {
   )
 }
 
+App.propTypes = {
+  onPlayerTypeButtonClick: PropTypes.func,
+  playerType: PropTypes.string
+}
+
 export default App

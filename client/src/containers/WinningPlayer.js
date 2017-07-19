@@ -28,7 +28,6 @@ const checkWin = (board) => {
 
 const mapStateToProps = ({ board, socket }) => {
   return {
-    board,
     winner: checkWin(board),
     socket
   }
@@ -36,10 +35,6 @@ const mapStateToProps = ({ board, socket }) => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onWinnerDeclared: winner => {
-      // dispatch(setWinner(winner))
-      socket.emit("action", setWinner(winner))
-    },
     onResetButtonPressed: socket => {
       // dispatch(resetGame())
       socket.emit("action", resetGame())
@@ -51,6 +46,5 @@ const WinningPlayer = connect(
   mapStateToProps,
   mapDispatchToProps
 )(Winner)
-
 
 export default WinningPlayer

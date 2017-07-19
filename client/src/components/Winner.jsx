@@ -3,7 +3,7 @@ import PropTypes from "prop-types"
 import { dispatch } from "redux"
 import { setWinner } from "../actions"
 
-const Winner = ({ board, winner, onWinnerDeclared, onResetButtonPressed, socket }) => {
+const Winner = ({ winner, onResetButtonPressed, socket }) => {
   if(!winner) return null
 
   return(
@@ -23,10 +23,9 @@ const Winner = ({ board, winner, onWinnerDeclared, onResetButtonPressed, socket 
 }
 
 Winner.propTypes = {
-  board: PropTypes.arrayOf(
-    PropTypes.string
-  ).isRequired,
   winner: PropTypes.string,
+  onResetButtonPressed: PropTypes.func,
+  socket: PropTypes.object
 }
 
 export default Winner
